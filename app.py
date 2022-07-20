@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, url_for, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from forms import RegistrationForm
 
@@ -12,20 +12,46 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/index/#register', methods=['GET', 'POST'])
+@app.route('/register', methods=['GET', 'POST'])
 def register():
-    form = RegistrationForm()
-    # entries are valid
-    if form.validate_on_submit():
-        # send form data to database
-        # notify user of success
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        password = request.form['password']
+        confirm_password = request.form['confirm-password']
+        location = request.form['location']
 
-        # flash(f'Account created for {form.username.data}!', 'success')
-        # send to home page
-        return redirect(url_for('index'))
+        #https://shannoncanyon-admiralwestern-5000.codio.io/#register
+        #db = get_db()
+        error = None
 
-    # entries are invalid - reload registration page
-    return render_template('/index/#register', title='Register', form=form)
+        if not name:
+            error = 'Name is required.'
+        elif not email:
+            error = 'Email is required'
+        elif not password:
+            error = 'Password is required.'
+        elif not confirm-password:
+            error = 'Confirming the password is required.'
+        elif not location:
+            error = 'Location is required.'
+
+        # if error is None:
+        #     try:
+        #         db.execute(
+        #             "INSERT INTO user (username, password) VALUES (?, ?)",
+        #             (username, generate_password_hash(password)),
+        #         )
+        #         db.commit()
+        #     except db.IntegrityError:
+        #         error = f"User {username} is already registered."
+        #     else:
+        #         return redirect(url_for("auth.login"))
+        if error is None:
+            return redirect(url_for("/index"))
+        #flash(error)
+
+    return render_template('/register')
 
 
 if __name__ == "__main__":
