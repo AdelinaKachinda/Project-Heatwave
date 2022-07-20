@@ -42,7 +42,7 @@ def register():
         flash(f'Account created for {form.name.data}!', 'success')
 
         # send to login page after registering account
-        return redirect(url_for('login.html'))
+        return redirect(url_for('login'))
 
     return render_template('register.html', title='Register', form=form)
 
