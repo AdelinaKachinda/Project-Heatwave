@@ -2,7 +2,9 @@ from flask import Flask, render_template, url_for, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from forms import RegistrationForm
 
-app = Flask(__name__)
+app = Flask(__name__,
+            static_folder='../static',
+            template_folder='../templates')
 app.config['SECRET_KEY'] = 'c2883c6f3a75f4135a2d0361c1ae3cb2'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
