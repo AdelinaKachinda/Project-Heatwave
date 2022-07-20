@@ -1,31 +1,54 @@
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, url_for, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from forms import RegistrationForm
 
-app = Flask(__name__,
-            static_url_path='/static')
+app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 def index():
     return render_template('index.html')
 
 
-@app.route('/index/#register', methods=['GET', 'POST'])
+@app.route('/index/register', methods=['GET', 'POST'])
 def register():
-    form = RegistrationForm()
-    # entries are valid
-    if form.validate_on_submit():
-        # send form data to database
-        # notify user of success
+    if request.method == 'POST':
+        name = request.form['name']
+        location = request.form['location']
+        email = request.form['email']
+        password = request.form['password']
+        confirm_password = request.form['confirm-password']
 
-        # flash(f'Account created for {form.username.data}!', 'success')
-        # send to home page
-        return redirect(url_for('index'))
+        error = None
 
-    # entries are invalid - reload registration page
-    return render_template('/index/#register', title='Register', form=form)
+        if not name:
+            error = 'Username is required.'
+        elif not location:
+            error = 'Location is requred.'
+        elif not email:
+            error = 'Email is required.'
+        elif not password:
+            error = 'Password is required.'
+        elif not confirm_password:
+            error = 'Confirm-Password is required.'
+
+        if error is None:
+            # try:
+            #    db.execute(
+            #        "INSERT INTO user (username, password) VALUES (?, ?)",
+            #        (username, generate_password_hash(password)),
+            #    )
+            #    db.commit()
+            # except db.IntegrityError:
+            #    error = f"User {username} is already registered."
+            return redirect(url_for("/login"))
+
+        # flash(error)
+        # entries are invalid - reload registration page
+
+    else:
+        return render_template('/register')
 
 
 if __name__ == "__main__":
