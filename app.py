@@ -3,6 +3,21 @@ from flask_sqlalchemy import SQLAlchemy
 from forms import RegistrationForm
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'c2883c6f3a75f4135a2d0361c1ae3cb2'
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+db = SQLAlchemy(app)
+
+class User(db.Model):
+  id = db.Column(db.Integer, primary_key=True)
+  name = db.Column(db.String(200), unique=True, nullable=False)
+  email = db.Column(db.String(120), unique=True, nullable=False)
+  password = db.Column(db.String(60), nullable=False)
+  location = db.Column(db.String(200), nullable=False)
+
+  def __repr__(self):
+    return f"User('{self.name}', '{self.email}', '{self.location}')"
+
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -13,45 +28,14 @@ def home():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    if request.method == 'POST':
-        name = request.form['name']
-        email = request.form['email']
-        password = request.form['password']
-        confirm_password = request.form['confirm-password']
-        location = request.form['location']
-
-        # https://shannoncanyon-admiralwestern-5000.codio.io/#register
-        # db = get_db()
-        error = None
-
-        if not name:
-            error = 'Name is required.'
-        elif not email:
-            error = 'Email is required'
-        elif not password:
-            error = 'Password is required.'
-        elif not confirm_password:
-            error = 'Confirming the password is required.'
-        elif not location:
-            error = 'Location is required.'
-
-        # if error is None:
-        #     try:
-        #         db.execute(
-        #             "INSERT INTO user (username, password) VALUES (?, ?)",
-        #             (username, generate_password_hash(password)),
-        #         )
-        #         db.commit()
-        #     except db.IntegrityError:
-        #         error = f"User {username} is already registered."
-        #     else:
-        #         return redirect(url_for('login'))
-        # if error is None:
-        #     return redirect(url_for("/home.html"))
-        # flash(error)
-
-    return render_template('register.html')
-
+    form = RegistrationForm()
+    if form.validate_on_submit(): # checks if entries are valid
+        user = User(name=form.name.data, email=form.email.data, location=form.location.data, password=form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        flash(f'Account created for {form.name.data}!', 'success')
+        return redirect(url_for('login.html')) # if so - send to home page
+    return render_template('register.html', title='Register', form=form)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
