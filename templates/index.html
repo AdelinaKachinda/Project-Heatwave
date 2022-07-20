@@ -25,24 +25,30 @@
 						<div class="logo">
 							<span class="icon fa-gem"></span>
 						</div>
+
+					<!-- Enter Location without logging-in -->
 						<div class="content">
 							<div class="inner">
 								<h1>Enter Location</h1>
 								<form method="post" action="#">
 									<div class="fields">
-
 										<div class="field">
 											<!-- <label for="location">Location</label> -->
-											<textarea class="align-center" name="Location" id="Location" rows="4"></textarea>
+											<textarea class="align-center" name="Location" id="fast-location" rows="4"></textarea>
 										</div>
 									</div>
 									<ul class="actions special">
 										<li><input type="submit" value="Enter" class="primary" /></li>
-										<!-- <li><input type="reset" value="Reset" /></li> -->
+										<li><input type="reset" value="Reset" /></li>
 									</ul>
 								</form>
 							</div>
 						</div>
+
+					<!--
+						Links to the home-page articles:
+						about, login, register, and docs
+					-->
 						<nav>
 							<ul>
 								<li><a href="#about">About</a></li>
@@ -54,25 +60,26 @@
 						</nav>
 					</header>
 
+
 				<!-- Main -->
 					<div id="main">
 
 						<!-- About -->
 							<article id="about">
 								<h2 class="major">About</h2>
-
 								<span class="image main"><img src="{{ url_for('static', filename='images/pic01.jpg') }}" alt="" /></span>
 								<p>Bringing awareness to climate change issues through weather information by providing users with information about how climate change has impacted weather conditions throughout the years.
 									This serves as a weather app so it can help users make decisions about their attire and daily activities.</p>
 								<p>Here are some examples of places that are experiencing terrible heatwaves in the world. <a href="https://earthobservatory.nasa.gov/images/150083/heatwaves-and-fires-scorch-europe-africa-and-asia?linkId=173253037#:~:text=In%20June%20and%20July%202022%2C%20heatwaves%20struck%20Europe%2C,of%20the%20Eastern%20Hemisphere%20on%20July%2013%2C%202022.">click here!</a> We are here to alert them of the current weather, 
 								   so they could adequately prepare for what is to come!</p>
-
 							</article>
 
 						<!-- Login -->
 							<article id="login">
 								<h2 class="major">Login</h2>
 								<span class="image main"><img src="{{ url_for('static', filename='images/pic02.jpg') }}" alt="" /></span>
+							
+							<!-- form -->
 								<form method="post" action="#">
 									<div class="fields">
 										<div class="field half">
@@ -84,23 +91,22 @@
 											<input type="password" name="password" id="login-password" />
 										</div>
 									</div>
+
 									<div align="right">
 											<ul class="actions">
-												<li><input type="submit" value="submit" class="primary" /></li>
+												<li><input type="submit" value="Submit" class="primary" /></li>
 												<li><input type="reset" value="Reset" /></li>
 											</ul>
 									</div>
 								</form>
-
 							</article>
 
 						<!-- Register -->
 							<article id="register">
 								<h2 class="major">Register</h2>
-								<!-- <span class="image main"><img src="{{url_for('static', filename='images/pic03.jpg') }}" alt="" /></span> -->
-								<!-- Form Inputs -->
+
+							<!-- form -->
 								<form method="post" action="#">
-									<!-- Registration Fields -->
 									<div class="fields">
 										<div class="field">
 											<label for="reg-name">Name</label>
@@ -123,7 +129,7 @@
 											<input type="password" name="confirm-password" id="reg-confirm-password" />
 										</div>
 									</div>
-									<!-- Action Fields (to submit/reset input) -->
+
 									<div align="right">
 										<ul class="actions">
 											<li><input type="submit" value="submit" class="primary" /></li>
@@ -213,7 +219,8 @@
 								</ul> -->
 							</article>
 
-						<!-- Elements -->
+						<!--Elements Article - not necessary right now!-->
+						<!--
 							<article id="elements">
 								<h2 class="major">Elements</h2>
 
@@ -232,15 +239,15 @@
 									<h4>Blockquote</h4>
 									<blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan faucibus. Vestibulum ante ipsum primis in faucibus lorem ipsum dolor sit amet nullam adipiscing eu felis.</blockquote>
 									<h4>Preformatted</h4>
-									<pre><code>i = 0;
-
-while (!deck.isInOrder()) {
-    print 'Iteration ' + i;
-    deck.shuffle();
-    i++;
-}
-
-print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
+									<pre><code>
+										i = 0;
+										while (!deck.isInOrder()) {
+											print 'Iteration ' + i;
+											deck.shuffle();
+											i++;
+										}
+										print 'It took ' + i + ' iterations to sort the deck.';
+									</code></pre>
 								</section>
 
 								<section>
@@ -452,14 +459,13 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 										</ul>
 									</form>
 								</section>
-
 							</article>
-
+						-->
 					</div>
 
 				<!-- Footer -->
 					<footer id="footer">
-						<p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+						<p class="copyright">&copy; Project Heatwave. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
 					</footer>
 
 			</div>
