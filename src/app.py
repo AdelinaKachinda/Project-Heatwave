@@ -22,7 +22,7 @@ class User(db.Model):
         return f"User('{self.name}', '{self.email}', '{self.location}')"
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 @app.route('/home', methods=['GET', 'POST'])
 def home():
     return render_template('home.html')
