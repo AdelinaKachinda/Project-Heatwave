@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "home-base.html" %}
 {% block home %}
 <!-- Body Header -->
 <header id="header">
@@ -32,8 +32,8 @@
     <nav>
         <ul>
             <li><a href="#about">About</a></li>
-            <li><a href="#login">Login</a></li>
-            <li><a href="#register">Register</a></li>
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+            <li><a href="{{ url_for('register') }}">Register</a></li>
             <li><a href="#docs">Docs</a></li>
             <!--<li><a href="#elements">Elements</a></li>-->
         </ul>

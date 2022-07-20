@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/home', methods=['GET', 'POST'])
-def index():
+def home():
     return render_template('home.html')
 
 
@@ -45,13 +45,18 @@ def register():
         #     except db.IntegrityError:
         #         error = f"User {username} is already registered."
         #     else:
-        #         return redirect(url_for("auth.login"))
-        if error is None:
-            return redirect(url_for("/index"))
+        #         return redirect(url_for('login'))
+        # if error is None:
+        #     return redirect(url_for("/home.html"))
         # flash(error)
 
-    return render_template('/register')
+    return render_template('/register.html')
 
 
-if __name__ == "__main__":      
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    render_template('/login.html')
+
+
+if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0")
