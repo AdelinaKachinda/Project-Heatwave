@@ -6,12 +6,12 @@ app = Flask(__name__)
 
 
 @app.route('/', methods=['GET', 'POST'])
-@app.route('/index', methods=['GET', 'POST'])
+@app.route('/home', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html')
+    return render_template('home.html')
 
 
-@app.route('/index/register', methods=['GET', 'POST'])
+@app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         name = request.form['name']
