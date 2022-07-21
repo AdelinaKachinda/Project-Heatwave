@@ -6,13 +6,13 @@ from wtforms.validators import DataRequired, Length, Email, EqualTo
 
 
 class LocationForm(FlaskForm):
-    latitude = DecimalField('Latitude', validators=[])
+    # latitude = DecimalField('Latitude', validators=[])
 
-    longitude = DecimalField('Longitude', validators=[])
+    # longitude = DecimalField('Longitude', validators=[])
+
+    # szipcode = IntegerField('Zip', validators=[Length(max=5)])
 
     city = StringField('City', validators=[DataRequired()])
-
-    zipcode = IntegerField('Zip', validators=[Length(max=5)])
 
 
 class RegistrationForm(FlaskForm):
