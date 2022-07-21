@@ -8,7 +8,9 @@ import datetime
 
 # FUNTION GET_FORECAST, RETURN JSON RESPONSE
 class Weather():
-    city = "New York"
+    def __init__(self, city):
+        self.city = city
+    
     date = datetime.datetime.today().date()
     NextDay_Date = (datetime.datetime.today() + datetime.timedelta(days=1)).date()
     NextNextDay_Date = (datetime.datetime.today() + datetime.timedelta(days=2)).date()
@@ -61,7 +63,7 @@ class Weather():
         return forecast_list
 
     #obtains the dictionary with all weather data for the next three days 
-    forecast_data = get_forecast(city)
+    forecast_data = get_forecast(self.city)
 
     forecast_dict = {"today": [], "tommorrow": [], "day_after": []}
     # holds the weather information in a dictionary in case we want to
@@ -110,11 +112,11 @@ class Weather():
         return forecast_df
 
 
-    print("This is the weather for city: ", city)
+    print("This is the weather for city: ", self.city)
     #print("date : " + day_forecast_info['date'])
     print(create_database(forecast_dict))
     #print((pd.DataFrame(query_result)))
 
-# weather = Weather()
-# print(weather.forecast_dict)
+weather = Weather("New York")
+print(weather.forecast_dict)
 

@@ -134,7 +134,7 @@ def login():
 
 @app.route('/main')
 def main():
-    weather = Weather()
+    weather = Weather("New York")
     my_text = weather.forecast_dict
     return render_template('main.html', text=my_text)
 
