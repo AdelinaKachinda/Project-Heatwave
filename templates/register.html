@@ -84,22 +84,19 @@
    				{% endif %}
 			</div>
 
-		<!-- User Location -->
+		<!-- City (required) -->
 			<div class="field">
-			<!-- City (required) -->
-				<div class="field">
-					{{ reg_form.city.label(for="city") }}
-					{% if reg_form.city.errors %} 
-						{{ reg_form.city() }}
-						<div>
-							{% for error in reg_form.city.errors%}
-								<span>{{error}}</span>
-							{% endfor %}
-						</div>
-					{% else %}
-						{{ reg_form.city() }}
-					{% endif %}
-				</div>
+				{{ reg_form.city.label(for="city") }}
+				{% if reg_form.city.errors %} 
+					{{ reg_form.city() }}
+					<div>
+						{% for error in reg_form.city.errors%}
+							<span>{{error}}</span>
+						{% endfor %}
+					</div>
+				{% else %}
+					{{ reg_form.city() }}
+				{% endif %}
 			</div>
 		</div>
 
