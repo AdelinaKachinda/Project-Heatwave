@@ -6,7 +6,9 @@ from forms import RegistrationForm
 from forms import LoginForm
 
 
-app = Flask(__name__)
+app = Flask(__name__,
+            static_folder='../static',
+            template_folder='../templates')
 app.config['SECRET_KEY'] = 'c2883c6f3a75f4135a2d0361c1ae3cb2'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
@@ -24,7 +26,7 @@ class User(db.Model):
         return f"User('{self.name}', '{self.email}', '{self.location}')"
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 @app.route('/home', methods=['GET', 'POST'])
 def home():
     return render_template('home.html')
@@ -110,6 +112,11 @@ def login():
         else:
             flash("That user doesnt exist - Try again")
     return render_template('login.html', form=form)
+
+
+@app.route('/main')
+def main():
+    return render_template('main.html')
 
 
 if __name__ == "__main__":
