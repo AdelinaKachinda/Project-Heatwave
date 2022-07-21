@@ -25,34 +25,44 @@ class User(db.Model):
 @app.route('/')
 @app.route('/home', methods=['GET', 'POST'])
 def home():
-    form = LocationForm()
+    parent_html = "home.html"
+    home_loc_form = LocationForm()
 
-    if form.validate_on_submit():
-        # location = Location(db.Model) ??
+    if home_loc_form.validate_on_submit():
         pass
 
-    return render_template('home.html')
+    return render_template('location-form.html',
+                           parent_html=parent_html, loc_form=home_loc_form)
+
+
+# @app.route('/location-form-home', methods=['GET', 'POST'])
+# def location_form_home():
+#    return render_template('location-form-home.html')
 
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    form = RegistrationForm()
+    parent_html = "register.html"
+    reg_form = RegistrationForm()
+    reg_loc_form = LocationForm()
 
     # checks if entries are valid
-    if form.validate_on_submit():
-        user = User(name=form.name.data,
-                    email=form.email.data,
-                    location=form.location.data,
-                    password=form.password.data)
+    if reg_form.validate_on_submit():
+        user = User(name=reg_form.name.data,
+                    email=reg_form.email.data,
+                    location=reg_form.location.data,
+                    password=reg_form.password.data)
 
         db.session.add(user)
         db.session.commit()
-        flash(f'Account created for {form.name.data}!', 'success')
+        flash(f'Account created for {reg_form.name.data}!', 'success')
 
         # send to login page after registering account
         return redirect(url_for('login'))
 
-    return render_template('register.html', title='Register', form=form)
+    return render_template('location-form.html', title="Register",
+                           parent_html=parent_html,
+                           reg_form=reg_form, loc_form=reg_loc_form)
 
 
 @app.route('/login', methods=['GET', 'POST'])

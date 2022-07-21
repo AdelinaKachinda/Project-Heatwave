@@ -1,0 +1,88 @@
+{% extends parent_html %}
+{% block location_form %}
+<!--
+    Location Form
+    - used for making a request to WeatherApi
+    - used to store user information (like when parent_html is "register.html")
+    - TODO: generalize so that it does NOT load form element
+            IF already nested in another form (from parent_html)
+    - TODO: generalize so that it does NOT load submit buttons
+            IF already nested in another form
+-->
+<form method="post" action="">
+    {{ loc_form.hidden_tag() }}
+    <div class="fields">
+    <!-- Latitude (optional) -->
+        <div class="field third">
+            <!-- <textarea class="align-center" name="Location" id="fast-location" rows="4"></textarea> -->
+            {{ loc_form.latitude.label(for="latitude") }}
+            {% if loc_form.latitude.errors %} 
+                {{ loc_form.latitude() }}
+                <div>
+                    {% for error in loc_form.latitude.errors%}
+                        <span>{{error}}</span>
+                    {% endfor %}
+                </div>
+           {% else %}
+               {{ loc_form.latitude() }}
+           {% endif %}
+        </div>
+
+    <!-- Latitude (optional) -->
+        <div class="field third">
+            {{ loc_form.longitude.label(for="longitude") }}
+            {% if loc_form.longitude.errors %} 
+                {{ loc_form.longitude() }}
+                <div>
+                    {% for error in loc_form.longitude.errors%}
+                        <span>{{error}}</span>
+                    {% endfor %}
+                </div>
+        {% else %}
+            {{ loc_form.longitude() }}
+        {% endif %}
+        </div>
+
+    <!-- Zip (optional) -->
+        <div class="field third">
+            {{ loc_form.zipcode.label(for="zip") }}
+            {% if loc_form.zipcode.errors %} 
+                {{ loc_form.zipcode() }}
+                <div>
+                    {% for error in loc_form.zipcode.errors%}
+                        <span>{{error}}</span>
+                    {% endfor %}
+                </div>
+        {% else %}
+            {{ loc_form.zipcode() }}
+        {% endif %}
+        </div>
+
+    <!-- City (required) -->
+        <div class="field">
+            {{ loc_form.city.label(for="city") }}
+            {% if loc_form.city.errors %} 
+                {{ loc_form.city() }}
+                <div>
+                    {% for error in loc_form.city.errors%}
+                        <span>{{error}}</span>
+                    {% endfor %}
+                </div>
+        {% else %}
+            {{ loc_form.city() }}
+        {% endif %}
+        </div>
+    </div>
+
+<!-- 
+    Only load submit buttons if not already in another form
+ -->
+    {% if parent_html != "register.html" %}
+        <ul class="actions special">
+            <li><input type="submit" value="Enter" class="primary" /></li>
+            <li><input type="reset" value="Reset" /></li>
+        </ul>
+    {% endif %}
+</form>
+
+{% endblock location_form %}
