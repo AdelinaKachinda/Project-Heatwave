@@ -34,22 +34,16 @@ def home():
     home_loc_form = LocationForm()
 
     if home_loc_form.validate_on_submit():
-        pass
+        return redirect(url_for('main'))
 
     return render_template('location-form.html',
                            parent_html=parent_html, loc_form=home_loc_form)
-
-
-# @app.route('/location-form-home', methods=['GET', 'POST'])
-# def location_form_home():
-#    return render_template('location-form-home.html')
 
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     parent_html = "register.html"
     reg_form = RegistrationForm()
-    reg_loc_form = LocationForm()
 
     # checks if entries are valid
     if reg_form.validate_on_submit():
@@ -57,12 +51,12 @@ def register():
         if user:
             flash("User already exist")
             return redirect(url_for('login'))
-        # hashed_pw = generate_password_hash(form.password_hash.data, "sha256")
-        password = request.reg_form.get('password')
+        password = request.form.get('password')
         user = User(name=reg_form.name.data,
                     email=reg_form.email.data,
-                    location=reg_form.location.data,
+                    location=reg_form.city.data,
                     password=generate_password_hash(password, method='sha256'))
+        print(user)
 
         db.session.add(user)
         db.session.commit()
@@ -72,17 +66,18 @@ def register():
         return redirect(url_for('login'))
 
     return render_template('location-form.html', title="Register",
-                           parent_html=parent_html,
-                           reg_form=reg_form, loc_form=reg_loc_form)
+                           parent_html=parent_html, reg_form=reg_form)
+
 
 # Flask_login Stuff
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
+
 @login_manager.user_loader
 def load_user(user_id):
-	return Users.query.get(int(user_id))
+    return User.query.get(int(user_id))
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -97,17 +92,20 @@ def login():
         user = User.query.filter_by(email=email).first()
 
         # check if the user actually exists
-        # take the user-supplied password, hash it, and compare it to the hashed password in the database
-        if user: 
-            #check the password
+        # take the user-supplied password, hash it, and compare it to
+        # the hashed password in the database
+        if user:
+            # check the password
             if check_password_hash(user.password, password):
-                #login_user(user)
-                flash("Log in Successful") #want this to flash with the users Name
-                return redirect(url_for('home')) # if the user doesn't exist or password is wrong, reload the page
+                # login_user(user)
+                # want this to flash with the users Name
+                flash("Log in Successful")
+            # if the user doesn't exist or password is wrong, reload the page
+                return redirect(url_for('home'))
             else:
                 flash("Wrong Password - Try again")
 
-    # if the above check passes, then we know the user has the right credentials
+    # if the above check passes, then we know the user has correct credentials
         # email = User.query.filter_by(email=form.email.data).first()
         # if email:
         #     #not sure if this is the best way to validate password
@@ -120,11 +118,12 @@ def login():
         #     if not user or not check_password_hash(user.password, password):
         #         user = User.query.filter_by(email=email).first()
         #         # user = User.query.filter_by(name=form.name.data).first()
-        #         #login_user(user) #part of flask login
+        #         # login_user(user) #part of flask login
         #         # flash(user)
-        #         flash("Log in Successful") #want this to flash with the users Name
+        #         # want this to flash with the users Name
+        #         flash("Log in Successful")
         #         return redirect(url_for('home'))
-            # else: 
+            # else:
             #     flash("Wrong Password - Try again")
         else:
             flash("That user doesnt exist - Try again")
@@ -132,7 +131,7 @@ def login():
 
 # weather Stuff
 
-@app.route('/main')
+@app.route('/main', methods=['GET', 'POST'])
 def main():
     weather = Weather()
     my_text = weather.forecast_dict
