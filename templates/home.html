@@ -9,25 +9,17 @@
 <!-- Enter Location without logging-in -->
     <div class="content">
         <div class="inner">
+        <!-- Location Header -->
             <h1>Enter Location</h1>
-            <form method="post" action="#">
-                <div class="fields">
-                    <div class="field">
-                        <!-- <label for="location">Location</label> -->
-                        <textarea class="align-center" name="Location" id="fast-location" rows="4"></textarea>
-                    </div>
-                </div>
-                <ul class="actions special">
-                    <li><input type="submit" value="Enter" class="primary" /></li>
-                    <li><input type="reset" value="Reset" /></li>
-                </ul>
-            </form>
+
+        <!-- Location Form -->
+            {% block location_form %} {% endblock location_form %}
         </div>
     </div>
 
 <!--
-    Links to the home-page articles:
-    about, login, register, and docs
+    Links to the home-page articles: about, docs
+    Links to login and registration pages: login, register
 -->
     <nav>
         <ul>
@@ -52,12 +44,6 @@
             <p>Here are some examples of places that are experiencing terrible heatwaves in the world. <a href="https://earthobservatory.nasa.gov/images/150083/heatwaves-and-fires-scorch-europe-africa-and-asia?linkId=173253037#:~:text=In%20June%20and%20July%202022%2C%20heatwaves%20struck%20Europe%2C,of%20the%20Eastern%20Hemisphere%20on%20July%2013%2C%202022.">click here!</a> We are here to alert them of the current weather, 
                 so they could adequately prepare for what is to come!</p>
         </article>
-
-    <!-- Login -->
-
-    
-    <!-- Register -->
-
 
     <!-- Documentation -->
         <article id="docs">

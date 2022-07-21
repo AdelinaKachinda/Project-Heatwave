@@ -2,7 +2,7 @@ from flask import Flask, render_template, url_for, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
-from forms import RegistrationForm
+from forms import RegistrationForm, LocationForm
 from forms import LoginForm
 
 
@@ -29,34 +29,50 @@ class User(db.Model):
 @app.route('/')
 @app.route('/home', methods=['GET', 'POST'])
 def home():
-    return render_template('home.html')
+    parent_html = "home.html"
+    home_loc_form = LocationForm()
+
+    if home_loc_form.validate_on_submit():
+        pass
+
+    return render_template('location-form.html',
+                           parent_html=parent_html, loc_form=home_loc_form)
+
+
+# @app.route('/location-form-home', methods=['GET', 'POST'])
+# def location_form_home():
+#    return render_template('location-form-home.html')
 
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    form = RegistrationForm()
+    parent_html = "register.html"
+    reg_form = RegistrationForm()
+    reg_loc_form = LocationForm()
 
     # checks if entries are valid
-    if form.validate_on_submit():
-        user = User.query.filter_by(name=form.name.data).first()
+    if reg_form.validate_on_submit():
+        user = User.query.filter_by(name=reg_form.name.data).first()
         if user:
             flash("User already exist")
             return redirect(url_for('login'))
-            #hashed_pw = generate_password_hash(form.password_hash.data, "sha256")
-        password = request.form.get('password')
-        user = User(name=form.name.data,
-                    email=form.email.data,
-                    location=form.location.data,
+        # hashed_pw = generate_password_hash(form.password_hash.data, "sha256")
+        password = request.reg_form.get('password')
+        user = User(name=reg_form.name.data,
+                    email=reg_form.email.data,
+                    location=reg_form.location.data,
                     password=generate_password_hash(password, method='sha256'))
 
         db.session.add(user)
         db.session.commit()
-        flash(f'Account created for {form.name.data}!', 'success')
+        flash(f'Account created for {reg_form.name.data}!', 'success')
 
         # send to login page after registering account
         return redirect(url_for('login'))
 
-    return render_template('register.html', title='Register', form=form)
+    return render_template('location-form.html', title="Register",
+                           parent_html=parent_html,
+                           reg_form=reg_form, loc_form=reg_loc_form)
 
 # Flask_login Stuff
 login_manager = LoginManager()

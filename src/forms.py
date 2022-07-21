@@ -1,6 +1,18 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import (
+    StringField, PasswordField, SubmitField,
+    FormField, DecimalField, IntegerField)
 from wtforms.validators import DataRequired, Length, Email, EqualTo
+
+
+class LocationForm(FlaskForm):
+    # latitude = DecimalField('Latitude', validators=[])
+
+    # longitude = DecimalField('Longitude', validators=[])
+
+    # szipcode = IntegerField('Zip', validators=[Length(max=5)])
+
+    city = StringField('City', validators=[DataRequired()])
 
 
 class RegistrationForm(FlaskForm):
@@ -10,8 +22,7 @@ class RegistrationForm(FlaskForm):
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
 
-    location = StringField('Location',
-                           validators=[DataRequired(), Length(min=2, max=200)])
+    location = FormField(LocationForm)
 
     password = PasswordField('Password', validators=[DataRequired()])
 

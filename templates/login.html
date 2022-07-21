@@ -49,9 +49,9 @@
 
             <div align="right">
                     <ul class="actions">
-                        <!-- <li><input type="submit" value="Submit" class="primary" /></li> -->
                         <li>{{ form.submit() }}</li>
                         <li><input type="reset" value="Reset" /></li>
+                        <li><a href="{{ url_for('home') }}" class="button">Go Back</a></li>
                     </ul>
             </div>
         </form>
