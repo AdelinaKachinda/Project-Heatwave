@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
-from forms import RegistrationForm
+from forms import RegistrationForm, LocationForm
 
 app = Flask(__name__,
             static_folder='../static',
@@ -25,6 +25,12 @@ class User(db.Model):
 @app.route('/')
 @app.route('/home', methods=['GET', 'POST'])
 def home():
+    form = LocationForm()
+
+    if form.validate_on_submit():
+        # location = Location(db.Model) ??
+        pass
+
     return render_template('home.html')
 
 

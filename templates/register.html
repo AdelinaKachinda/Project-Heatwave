@@ -6,6 +6,8 @@
 	<form method="post" action="/register">
 	{{ form.hidden_tag() }}
 		<div class="fields">
+
+		<!-- User's Name -->
 			<div class="field">
 				<!--
 				<label for="reg-name">Name</label>
@@ -23,6 +25,8 @@
        				{{ form.name() }}
    				{% endif %}
 			</div>
+		
+		<!-- User Location -->
 			<div class="field">
 				<!--
 				<label for="reg-location">Location</label>
@@ -40,6 +44,8 @@
        				{{ form.location() }}
    				{% endif %}
 			</div>
+
+		<!-- User Email -->
 			<div class="field">
 				<!--
 				<label for="reg-email">Email</label>
@@ -58,6 +64,8 @@
    				{% endif %}
 				
 			</div>
+
+		<!-- User Password -->
 			<div class="field half">
 				<!--
 				<label for="reg-password">Password</label>
@@ -75,6 +83,8 @@
        				{{ form.password() }}
    				{% endif %}
 			</div>
+
+		<!-- Confirm User Password -->
 			<div class="field half">
 				<!--
 				<label for="reg-confirm-password">Confirm Password</label>
@@ -94,6 +104,8 @@
    				{% endif %}
 			</div>
 		</div>
+
+	<!-- Submit or Clear Form -->
 		<div align="right">
 			<ul class="actions">
 				<!-- <li><input type="submit" value="submit" class="primary" /></li> -->
