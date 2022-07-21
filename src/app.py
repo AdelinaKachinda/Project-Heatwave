@@ -43,7 +43,6 @@ def home():
 def register():
     parent_html = "register.html"
     reg_form = RegistrationForm()
-    reg_loc_form = LocationForm()
 
     # checks if entries are valid
     if reg_form.validate_on_submit():
@@ -51,12 +50,12 @@ def register():
         if user:
             flash("User already exist")
             return redirect(url_for('login'))
-        # hashed_pw = generate_password_hash(form.password_hash.data, "sha256")
-        password = request.reg_form.get('password')
+        password = request.form.get('password')
         user = User(name=reg_form.name.data,
                     email=reg_form.email.data,
-                    location=reg_form.location.data,
+                    location=reg_form.city.data,
                     password=generate_password_hash(password, method='sha256'))
+        print(user)
 
         db.session.add(user)
         db.session.commit()
@@ -66,8 +65,7 @@ def register():
         return redirect(url_for('login'))
 
     return render_template('location-form.html', title="Register",
-                           parent_html=parent_html,
-                           reg_form=reg_form, loc_form=reg_loc_form)
+                           parent_html=parent_html, reg_form=reg_form)
 
 
 # Flask_login Stuff
