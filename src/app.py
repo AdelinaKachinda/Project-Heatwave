@@ -4,6 +4,7 @@ from flask_login import UserMixin, login_user, LoginManager, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from forms import RegistrationForm, LocationForm
 from forms import LoginForm
+from weather import Weather
 
 
 app = Flask(__name__,
@@ -128,10 +129,13 @@ def login():
             flash("That user doesnt exist - Try again")
     return render_template('login.html', form=form)
 
+# weather Stuff
 
 @app.route('/main', methods=['GET', 'POST'])
 def main():
-    return render_template('main.html')
+    weather = Weather()
+    my_text = weather.forecast_dict
+    return render_template('main.html', text=my_text)
 
 
 if __name__ == "__main__":

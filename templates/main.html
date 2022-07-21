@@ -27,15 +27,16 @@
 						<p></p>
 					</section>
 				</div>
+    		</div>
 
-			<!-- Forecast -->
-				<div class="flex-child">
-					<section class="forecast">
-						<h1>3-Day Forecast</h1>
-						<p></p>
-					</section>
-				</div>
-			  </div>
+			<div class="flex-child">
+				<section class="forecast">
+					<div>
+						{% block forecast %}
+						<p>{{ text }}</p>
+						{% endblock forecast %}
+					</div>
+				</section>
 
 
 		<!-- Scripts -->
