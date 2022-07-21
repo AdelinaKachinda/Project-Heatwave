@@ -33,7 +33,7 @@ def home():
     home_loc_form = LocationForm()
 
     if home_loc_form.validate_on_submit():
-        pass
+        return redirect(url_for('main'))
 
     return render_template('location-form.html',
                            parent_html=parent_html, loc_form=home_loc_form)
@@ -129,7 +129,7 @@ def login():
     return render_template('login.html', form=form)
 
 
-@app.route('/main')
+@app.route('/main', methods=['GET', 'POST'])
 def main():
     return render_template('main.html')
 

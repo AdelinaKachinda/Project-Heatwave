@@ -472,41 +472,29 @@ ul.icons {
     margin: 0 0 1em 0; } }
 
 
-.container {
-    height: 550px;
-    width: 800px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    border: 3px solid black;
-    display: inline-flex;
+
+.flex-container {
+  display: flex;
 }
 
-.item {
-    width: 100em;
+.flex-child {
+  flex: 1;
+  padding: 0.3em;
+  outline: 1px solid lightcyan;
 }
- 
+
+
+.flex-child:first-child {
+  margin-right: 20px;
+  flex:1.5;
+}
+
+.today-weather {
+  text-align: center;
+}
+
 
 .forecast {
-    height: 8000px;
-    width: 450px;
-    display: flexbox;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    border: 3px solid black;
-    display: inline-flex;
-    margin-left: 72%;
+  text-align: center;
 }
-
-.items {
-    width: 100em;
-}
- 
-
-
-
-
-
 
