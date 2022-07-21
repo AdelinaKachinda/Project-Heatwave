@@ -39,11 +39,6 @@ def home():
                            parent_html=parent_html, loc_form=home_loc_form)
 
 
-# @app.route('/location-form-home', methods=['GET', 'POST'])
-# def location_form_home():
-#    return render_template('location-form-home.html')
-
-
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     parent_html = "register.html"
@@ -74,14 +69,16 @@ def register():
                            parent_html=parent_html,
                            reg_form=reg_form, loc_form=reg_loc_form)
 
+
 # Flask_login Stuff
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
+
 @login_manager.user_loader
 def load_user(user_id):
-	return Users.query.get(int(user_id))
+    return User.query.get(int(user_id))
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -96,17 +93,20 @@ def login():
         user = User.query.filter_by(email=email).first()
 
         # check if the user actually exists
-        # take the user-supplied password, hash it, and compare it to the hashed password in the database
-        if user: 
-            #check the password
+        # take the user-supplied password, hash it, and compare it to
+        # the hashed password in the database
+        if user:
+            # check the password
             if check_password_hash(user.password, password):
-                #login_user(user)
-                flash("Log in Successful") #want this to flash with the users Name
-                return redirect(url_for('home')) # if the user doesn't exist or password is wrong, reload the page
+                # login_user(user)
+                # want this to flash with the users Name
+                flash("Log in Successful")
+            # if the user doesn't exist or password is wrong, reload the page
+                return redirect(url_for('home'))
             else:
                 flash("Wrong Password - Try again")
 
-    # if the above check passes, then we know the user has the right credentials
+    # if the above check passes, then we know the user has correct credentials
         # email = User.query.filter_by(email=form.email.data).first()
         # if email:
         #     #not sure if this is the best way to validate password
@@ -119,11 +119,12 @@ def login():
         #     if not user or not check_password_hash(user.password, password):
         #         user = User.query.filter_by(email=email).first()
         #         # user = User.query.filter_by(name=form.name.data).first()
-        #         #login_user(user) #part of flask login
+        #         # login_user(user) #part of flask login
         #         # flash(user)
-        #         flash("Log in Successful") #want this to flash with the users Name
+        #         # want this to flash with the users Name
+        #         flash("Log in Successful")
         #         return redirect(url_for('home'))
-            # else: 
+            # else:
             #     flash("Wrong Password - Try again")
         else:
             flash("That user doesnt exist - Try again")
