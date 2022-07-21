@@ -1,28 +1,59 @@
-{% extends "home.html" %}
+{% extends "home-base.html" %}
 {% block login %}
+{% for message in get_flashed_messages() %}
+	
+	<div class="alert alert-warning alert-dismissible fade show" role="alert">
+	  {{ message }}
+	  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
+{% endfor %}
     <article id="login">
-        <h2 class="major">Login</h2>
-        <span class="image main"><img src="{{ url_for('static', filename='images/pic02.jpg') }}" alt="" /></span>
+    <h2 class="major">Login</h2>
+    <span class="image main"><img src="{{ url_for('static', filename='images/pic02.jpg') }}" alt="" /></span>
 
     <!-- form -->
-        <form method="post" action="#">
+        <form method="post" action="/login">
+        {{ form.hidden_tag() }}
             <div class="fields">
                 <div class="field half">
-                    <label for="login-email">Email</label>
-                    <input type="text" name="email" id="login-email" />
+                    <!-- <label for="login-email">Email</label>
+                    <input type="text" name="email" id="login-email" /> -->
+                    {{ form.email.label(for="login-email")}} 
+                    {% if form.email.errors %} 
+					    {{ form.email() }}
+					    <div>
+         				    {% for error in form.email.errors%}
+             				    <span>{{error}}</span>
+         				    {% endfor %}
+       				    </div>
+   				    {% else %}
+       				    {{ form.email() }}
+   				    {% endif %}
                 </div>
                 <div class="field half">
-                    <label for="login-password">password</label>
-                    <input type="password" name="password" id="login-password" />
+                    <!-- <label for="login-password">password</label>
+                    <input type="password" name="password" id="login-password" /> -->
+                    {{ form.password.label(for="login-password")}}
+                    {% if form.password.errors %} 
+					    {{ form.password() }}
+					    <div>
+         				    {% for error in form.password.errors%}
+             				    <span>{{error}}</span>
+         				    {% endfor %}
+       				    </div>
+   				    {% else %}
+       				    {{ form.password() }}
+   				    {% endif %}
                 </div>
             </div>
 
             <div align="right">
                     <ul class="actions">
-                        <li><input type="submit" value="Submit" class="primary" /></li>
+                        <li>{{ form.submit() }}</li>
                         <li><input type="reset" value="Reset" /></li>
+                        <li><a href="{{ url_for('home') }}" class="button">Go Back</a></li>
                     </ul>
             </div>
         </form>
     </article>
-{% block login %}
+{% endblock login %}
