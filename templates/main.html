@@ -19,24 +19,20 @@
 			</header>
 
 
-			<div class="flex-container">
+			<div class="outer">
 			<!-- Today's Weather -->
-				<div class="flex-child">
-					<section class="today-weather">
-						<h1>Today's Weather</h1>
+				<section class="today-weather">
+					<h1>Today's Weather</h1>
 						<p></p>
-					</section>
-				</div>
-    		</div>
-
-			<div class="flex-child">
-				<section class="forecast">
-					<div>
-						{% block forecast %}
-						<p>{{ text }}</p>
-						{% endblock forecast %}
-					</div>
 				</section>
+
+				<section class="forecast">
+					<h1>Forecast</h1>
+					{% block forecast %}
+						<p>{{ text }}</p>
+					{% endblock forecast %}
+				</section>
+			</div>
 
 
 		<!-- Scripts -->

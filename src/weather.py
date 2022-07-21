@@ -110,9 +110,9 @@ class Weather():
         return forecast_df
 
 
-    print("This is the weather for city: ", city)
+    # print("This is the weather for city: ", city)
     #print("date : " + day_forecast_info['date'])
-    print(create_database(forecast_dict))
+    # print(create_database(forecast_dict))
     #print((pd.DataFrame(query_result)))
 
 # weather = Weather()

@@ -129,8 +129,8 @@ def login():
             flash("That user doesnt exist - Try again")
     return render_template('login.html', form=form)
 
-# weather Stuff
 
+# weather Stuff
 @app.route('/main', methods=['GET', 'POST'])
 def main():
     weather = Weather()
