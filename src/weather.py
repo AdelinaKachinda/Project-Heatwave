@@ -28,9 +28,7 @@ class Weather:
     def weather_by_date(self, date, forecast_data):
         i = 0
         date_forecast_info = None
-
         while i < len(forecast_data["forecast"]["forecastday"]):
-            print(forecast_data["forecast"]["forecastday"][i]['date'])
             if forecast_data["forecast"]["forecastday"][i]['date'] == str(date):
                 date_forecast_info = forecast_data["forecast"]["forecastday"][i]
             i += 1
@@ -52,7 +50,6 @@ class Weather:
                 else:
                     val = str(key) + " : " + str(forecast_info['day'][key])
                     forecast_list.insert(count, val)
-
                 count += 1
 
         return forecast_list
@@ -60,10 +57,8 @@ class Weather:
     def retrieve_weather_data(self):
         eastern = timezone('US/Eastern')
         date = datetime.datetime.now(eastern).date()
-        NextDay_Date = (datetime.datetime.now(eastern)
-                        + datetime.timedelta(days=1)).date()
-        NextNextDay_Date = (datetime.datetime.now(eastern)
-                            + datetime.timedelta(days=2)).date()
+        NextDay_Date = (datetime.datetime.now(eastern) + datetime.timedelta(days=1)).date()
+        NextNextDay_Date = (datetime.datetime.now(eastern) + datetime.timedelta(days=2)).date()
 
         forecast_data = self.get_forecast(self.city)
         forecast_dict = {"today": [], "tommorrow": [], "day_after": []}
