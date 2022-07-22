@@ -37,6 +37,8 @@ def home():
     home_loc_form = LocationForm()
 
     if home_loc_form.validate_on_submit():
+        global city
+        city = home_loc_form.city.data
         return redirect(url_for('main'))
 
     return render_template('location-form.html',
