@@ -3,7 +3,9 @@
 <!-- Body Header -->
 <header id="header">
     <div class="logo">
-        <span class="icon fa-gem"></span>
+        <span class="icon">
+            <img src="{{ url_for('static', filename='assets/webfonts/noun-heatwave-white.svg') }}" alt="Heatwave SVG">
+        </span>
     </div>
 
 <!-- Enter Location without logging-in -->
@@ -38,7 +40,8 @@
     <!-- About -->
         <article id="about">
             <h2 class="major">About</h2>
-            <span class="image main"><img src="{{ url_for('static', filename='images/pic01.jpg') }}" alt="" /></span>
+
+            <!--<span class="image main"><img src="{{ url_for('static', filename='images/pic01.jpg') }}" alt="" /></span> -->
             <p>Bringing awareness to people about weather conditions
                  by providing them with information about how 
                 the weather will be on the current day and in three days time.
