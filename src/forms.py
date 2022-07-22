@@ -22,7 +22,8 @@ class RegistrationForm(FlaskForm):
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
 
-    location = FormField(LocationForm)
+    # location = FormField(LocationForm)
+    city = StringField('City', validators=[DataRequired()])
 
     password = PasswordField('Password', validators=[DataRequired()])
 
@@ -31,10 +32,10 @@ class RegistrationForm(FlaskForm):
                                                  EqualTo('password')])
     submit = SubmitField('Sign Up')
 
+
 # Create Log in form
 class LoginForm(FlaskForm):
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Submit')
-

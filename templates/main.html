@@ -19,26 +19,24 @@
 			</header>
 
 
-			<div class="container">
-        		<div class="item">
-					We can add the weather information for the current day here.
-					We can also add the humidity, pressure, sunrise, sunset, dewpoint and
-					many more! We can make this go longer or we can leave it to that length.
+			<div class="flex-container">
+			<!-- Today's Weather -->
+				<div class="flex-child">
+					<section class="today-weather">
+						<h1>Today's Weather</h1>
+						<p></p>
+					</section>
 				</div>
     		</div>
-			
-			<div class="forecast">
-				<div class="items">
-                   We can add the weather information for the current day here.
-					We can also add the humidity, pressure, sunrise, sunset, dewpoint and
-					many more! We can make this go longer or we can leave it to that length.
-                </div>
-            </div>
-			<div>
-				{% block forecast %}
-					<p>{{ text }}</p>
-				{% endblock forecast %}
-			</div>
+
+			<div class="flex-child">
+				<section class="forecast">
+					<div>
+						{% block forecast %}
+						<p>{{ text }}</p>
+						{% endblock forecast %}
+					</div>
+				</section>
 
 
 		<!-- Scripts -->
