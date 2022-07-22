@@ -73,10 +73,7 @@ class Weather:
         day_after_forecast_info = self.weather_by_date(NextNextDay_Date,
                                                        forecast_data)
 
-        print(len(day_forecast_info))
-        print(len(tommorrow_forecast_info))
-        print(len(day_after_forecast_info))
-
+     
         today_forecast = self.get_forecast_info(day_forecast_info)
         tommorrow_forecast = self.get_forecast_info(tommorrow_forecast_info)
         day_after_forecast = self.get_forecast_info(day_after_forecast_info)
@@ -96,5 +93,3 @@ class Weather:
         return forecast_df
 
 
-# example = Weather("New York")
-# print(example.retrieve_weather_data())

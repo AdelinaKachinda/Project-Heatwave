@@ -24,48 +24,61 @@
 				<section class="today-weather">
 					<h1>Today's Weather</h1>
 							<div class="doc_page_technical_elements" >
-                				<h4>Info:</h4>
+                				<h4>Temperature:</h4>
                     				<ul>
-                        				<li></li>
+                              <li>{{ text["today"][1] }}</li>
+										          <li>{{ text["today"][3] }} </li>
+                    				</ul>
+                			</div>
+
+							<div class="doc_page_technical_elements" >
+                				<h4>Wind:</h4>
+                    				<ul>
+                        				<li>{{ text["today"][6] }}</li>
                     				</ul>
                 
                 			</div>
 
 							<div class="doc_page_technical_elements" >
-                				<h4>Info:</h4>
+                				<h4>Chance of Rain:</h4>
                     				<ul>
-                        				<li>Details</li>
-                    				</ul>
-                
-                			</div>
-
-							<div class="doc_page_technical_elements" >
-                				<h4>Info:</h4>
-                    				<ul>
-                        				<li>Details</li>
+                        				<li>{{ text["today"][14] }}</li>
                     				</ul>
                 
                 			</div>
 
 
 							<div class="doc_page_technical_elements" >
-								<h4>Info:</h4>
+								<h4>Chance of snow:</h4>
 									<ul>
-										<li>Details</li>
+										<li>
+											{{ text["today"][16] }}
+										</li>
 									</ul>
 
 							</div>
 					
 					</section>
-
-
-						
+				
 				
 
 				<section class="forecast">
 					<h1>Forecast</h1>
 					{% block forecast %}
-						<p>{{ text }}</p>
+						<h3>Tomorrow</h3>
+							<!-- <p>{{ text["tommorrow"] }}</p> -->
+							<ul>
+								<li>{{ text["tommorrow"][1] }}</li>
+								<li>{{ text["tommorrow"][3] }}</li>
+								<li>{{ text["tommorrow"][14] }}</li>
+							</ul>
+						<h3>Day After</h3>
+							<!-- <p>{{ text["day_after"] }} </p> -->
+							<ul>
+								<li>{{ text["day_after"][1] }}</li>
+								<li>{{ text["day_after"][3] }}</li>
+								<li>{{ text["day_after"][14] }}</li>
+							</ul>
 					{% endblock forecast %}
 				</section>
 			</div>
