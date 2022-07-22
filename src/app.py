@@ -15,6 +15,7 @@ app.config['SECRET_KEY'] = 'c2883c6f3a75f4135a2d0361c1ae3cb2'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)
 
+#city = ""
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -35,7 +36,12 @@ def home():
     home_loc_form = LocationForm()
 
     if home_loc_form.validate_on_submit():
+<<<<<<< HEAD
+
+        pass
+=======
         return redirect(url_for('main'))
+>>>>>>> 60295a1ec90327c8f434f5476bbf699af2b1acd9
 
     return render_template('location-form.html',
                            parent_html=parent_html, parent=parent,
@@ -94,7 +100,7 @@ def login():
         remember = True if request.form.get('remember') else False
 
         user = User.query.filter_by(email=email).first()
-
+        
         # check if the user actually exists
         # take the user-supplied password, hash it, and compare it to
         # the hashed password in the database
@@ -137,7 +143,7 @@ def login():
 # weather Stuff
 @app.route('/main', methods=['GET', 'POST'])
 def main():
-    weather = Weather()
+    weather = Weather("New York")
     my_text = weather.forecast_dict
     return render_template('main.html', text=my_text)
 
