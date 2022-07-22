@@ -107,8 +107,8 @@ def login():
                 # login_user(user)
                 # want this to flash with the users Name
                 flash("Log in Successful")
+                global city
                 city = user.location
-                print(city)
             # if the user doesn't exist or password is wrong, reload the page
                 return redirect(url_for('main'))
             else:
