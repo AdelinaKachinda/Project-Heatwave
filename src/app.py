@@ -123,6 +123,7 @@ def login():
 def main():
     print(city)
     weather = Weather(city)
+    
     my_text = weather.retrieve_weather_data()
     return render_template('main.html', text=my_text)
 
