@@ -15,7 +15,7 @@ app.config['SECRET_KEY'] = 'c2883c6f3a75f4135a2d0361c1ae3cb2'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)
 
-#city = ""
+city = "New York"
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -28,6 +28,7 @@ class User(db.Model):
         return f"User('{self.name}', '{self.email}', '{self.location}')"
 
 
+
 @app.route('/')
 @app.route('/home', methods=['GET', 'POST'])
 def home():
@@ -35,12 +36,7 @@ def home():
     home_loc_form = LocationForm()
 
     if home_loc_form.validate_on_submit():
-<<<<<<< HEAD
-
-        pass
-=======
         return redirect(url_for('main'))
->>>>>>> 60295a1ec90327c8f434f5476bbf699af2b1acd9
 
     return render_template('location-form.html',
                            parent_html=parent_html, loc_form=home_loc_form)
@@ -93,9 +89,10 @@ def login():
         # login code goes here
         email = request.form.get('email')
         password = request.form.get('password')
-        remember = True if request.form.get('remember') else False
+        # remember = True if request.form.get('remember') else False
 
         user = User.query.filter_by(email=email).first()
+        #print(user.location)
         
         # check if the user actually exists
         # take the user-supplied password, hash it, and compare it to
@@ -106,31 +103,12 @@ def login():
                 # login_user(user)
                 # want this to flash with the users Name
                 flash("Log in Successful")
+                city = user.location
+                print(city)
             # if the user doesn't exist or password is wrong, reload the page
-                return redirect(url_for('home'))
+                return redirect(url_for('main'))
             else:
                 flash("Wrong Password - Try again")
-
-    # if the above check passes, then we know the user has correct credentials
-        # email = User.query.filter_by(email=form.email.data).first()
-        # if email:
-        #     #not sure if this is the best way to validate password
-        #     password = User.query.filter_by(password=form.password.data).first()
-        #     #cursor.execute(text(<whatever_needed_to_be_casted>))
-        #     #password=form.password.data
-        #     #check password
-        #     #if check_password_hash(user.password_hash, form.password.data)
-        #     #if password:
-        #     if not user or not check_password_hash(user.password, password):
-        #         user = User.query.filter_by(email=email).first()
-        #         # user = User.query.filter_by(name=form.name.data).first()
-        #         # login_user(user) #part of flask login
-        #         # flash(user)
-        #         # want this to flash with the users Name
-        #         flash("Log in Successful")
-        #         return redirect(url_for('home'))
-            # else:
-            #     flash("Wrong Password - Try again")
         else:
             flash("That user doesnt exist - Try again")
     return render_template('login.html', form=form)
@@ -139,8 +117,9 @@ def login():
 
 @app.route('/main', methods=['GET', 'POST'])
 def main():
-    weather = Weather("New York")
-    my_text = weather.forecast_dict
+    print(city)
+    weather = Weather(city)
+    my_text = weather.retrieve_weather_data()
     return render_template('main.html', text=my_text)
 
 
