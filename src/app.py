@@ -36,12 +36,7 @@ def home():
     home_loc_form = LocationForm()
 
     if home_loc_form.validate_on_submit():
-<<<<<<< HEAD
-
-        pass
-=======
         return redirect(url_for('main'))
->>>>>>> 60295a1ec90327c8f434f5476bbf699af2b1acd9
 
     return render_template('location-form.html',
                            parent_html=parent_html, parent=parent,
