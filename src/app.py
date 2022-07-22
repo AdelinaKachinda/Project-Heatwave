@@ -33,18 +33,21 @@ class User(db.Model):
 @app.route('/home', methods=['GET', 'POST'])
 def home():
     parent_html = "home.html"
+    parent = "/home"
     home_loc_form = LocationForm()
 
     if home_loc_form.validate_on_submit():
         return redirect(url_for('main'))
 
     return render_template('location-form.html',
-                           parent_html=parent_html, loc_form=home_loc_form)
+                           parent_html=parent_html, parent=parent,
+                           loc_form=home_loc_form)
 
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     parent_html = "register.html"
+    parent = "/register"
     reg_form = RegistrationForm()
 
     # checks if entries are valid
@@ -68,7 +71,8 @@ def register():
         return redirect(url_for('login'))
 
     return render_template('location-form.html', title="Register",
-                           parent_html=parent_html, reg_form=reg_form)
+                           parent_html=parent_html, parent=parent,
+                           reg_form=reg_form)
 
 
 # Flask_login Stuff
@@ -113,8 +117,8 @@ def login():
             flash("That user doesnt exist - Try again")
     return render_template('login.html', form=form)
 
-# weather Stuff
 
+# weather Stuff
 @app.route('/main', methods=['GET', 'POST'])
 def main():
     print(city)
